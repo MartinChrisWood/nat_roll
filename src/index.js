@@ -5,6 +5,16 @@ import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 
+// Todo: 2, 4, 6, 8, 10, 12 and 20-sided dice with appropriate graphics render
+// Dice must show appropriate shape and different pastel fills to help discern
+// Must work as mobile app
+// Can I add a mobius die?
+
+function randomKey() {
+    // For generating unique id's
+    return parseInt(Math.random() * 1000000);
+}
+
 // N-sided dice
 class Dice extends React.Component {
   // Creates single isolated canvas for dice
@@ -31,21 +41,36 @@ class DiceTray extends React.Component {
     // re-rendering
     var tray = this.state.tray.slice();
     var dice = {
-        dice_key: tray.length,
+        dice_key: randomKey(),
         dice_sides: n_sides,
         dice_roll: 0,
     }
     this.setState({tray: tray.concat([dice])});
   }
 
-  removeDice(i) {
+  getDiceIndex(diceKey) {
+    for (var i = 0; i < this.state.tray.length; i++) {
+        if (this.state.tray[i]['dice_key'] == diceKey) {
+            return i;
+        };
+    };
+  }
+
+  removeDice(diceKey) {
     // Delete a specific die from the tray
+    var i = this.getDiceIndex(diceKey);
     var tray = this.state.tray.slice();
-    tray.pop(i);
+
+    console.log(i);
+    console.log(tray.length);
+
+    // remove elements in-place
+    tray.splice(i, 1);
     this.setState({tray: tray});
   }
 
-  rollOneDice(i) {
+  rollOneDice(diceKey) {
+    var i = this.getDiceIndex(diceKey);
     var tray = this.state.tray.slice();
     var dice = tray[i];
     dice['dice_roll'] = (1 + Math.floor(Math.random() * dice.dice_sides));
@@ -53,12 +78,12 @@ class DiceTray extends React.Component {
     this.setState({tray: tray});
   }
 
-  handleDiceClick(i) {
+  handleDiceClick(diceKey) {
     if (window.event.ctrlKey) {
-        this.removeDice(i);
+        this.removeDice(diceKey);
         return;
     }
-    this.rollOneDice(i);
+    this.rollOneDice(diceKey);
   }
 
   rollAllDice() {
