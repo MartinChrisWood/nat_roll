@@ -26,14 +26,23 @@ class DiceTray extends React.Component {
     };
   }
 
-  addDice() {
+  addDice(n_sides) {
+    // Add a single dice.  Note copying of array and use of setState to trigger
+    // re-rendering
     var tray = this.state.tray.slice();
     var dice = {
         dice_key: tray.length,
-        dice_sides: 6,
+        dice_sides: n_sides,
         dice_roll: 0,
     }
     this.setState({tray: tray.concat([dice])});
+  }
+
+  removeDice(i) {
+    // Delete a specific die from the tray
+    var tray = this.state.tray.slice();
+    tray.pop(i);
+    this.setState({tray: tray});
   }
 
   rollOneDice(i) {
@@ -42,6 +51,14 @@ class DiceTray extends React.Component {
     dice['dice_roll'] = (1 + Math.floor(Math.random() * dice.dice_sides));
     tray[i] = dice;
     this.setState({tray: tray});
+  }
+
+  handleDiceClick(i) {
+    if (window.event.ctrlKey) {
+        this.removeDice(i);
+        return;
+    }
+    this.rollOneDice(i);
   }
 
   rollAllDice() {
@@ -61,7 +78,7 @@ class DiceTray extends React.Component {
       <div id="dice_tray">
         <div>
           <h2>Test tray: {this.state.tray.length}.</h2>
-          <button onClick={() => this.addDice()}>Add Dice</button>
+          <button onClick={() => this.addDice(6)}>Add Dice</button>
           <button onClick={() => this.rollAllDice()}>Roll Dice</button>
           <button onClick={() => this.setState({tray: []})}>Clear Dice</button>
         </div>
@@ -70,7 +87,7 @@ class DiceTray extends React.Component {
           <Dice 
             key={component.dice_key} 
             roll={component.dice_roll}
-            onClick={() => this.rollOneDice(component.dice_key)}/>))}
+            onClick={() => this.handleDiceClick(component.dice_key)}/>))}
         </div>
       </div>
     );
