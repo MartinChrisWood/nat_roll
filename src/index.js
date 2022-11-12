@@ -4,12 +4,11 @@ import D2Graphic from './canvas';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
-// Todo: 2, 4, 6, 8, 10, 12 and 20-sided dice with appropriate graphics render
-// Dice must show appropriate shape and different pastel fills to help discern
-// Must work as mobile app
-// Can I add a mobius die?
 // Todo: update key function to prevent clashes forever
+// Add dice Sum functionality (excluding coins?)
+// Center the numbers on the dice
+// Style the app
+// Deploy with Heroku
 
 function randomKey() {
     // For generating unique id's
@@ -62,9 +61,6 @@ class DiceTray extends React.Component {
     var i = this.getDiceIndex(diceKey);
     var tray = this.state.tray.slice();
 
-    console.log(i);
-    console.log(tray.length);
-
     // remove elements in-place
     tray.splice(i, 1);
     this.setState({tray: tray});
@@ -103,7 +99,7 @@ class DiceTray extends React.Component {
     return (
       <div id="dice_tray">
         <div>
-          <h2>Test tray: {this.state.tray.length}.</h2>
+          <h2>Tray size: {this.state.tray.length}.</h2>
           <button onClick={() => this.addDice(2)}>Add Coin</button>
           <button onClick={() => this.addDice(6)}>Add D6</button>
           <button onClick={() => this.addDice(8)}>Add D8</button>

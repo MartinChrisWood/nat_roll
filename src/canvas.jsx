@@ -1,6 +1,18 @@
 import React, { useRef, useEffect } from 'react';
 import { createContext } from 'react';
 
+var diceFontSize = 30;
+var diceFont = diceFontSize + "px monospace";
+
+function centerNumber(number, canvasX, canvasY, fontSize) {
+    // Find number of digits in the number
+    var nDigits = ("" + number).length;
+    return {
+        xPoint: (canvasX - (nDigits * fontSize / 2)) / 2,
+        yPoint: (canvasY + fontSize) / 2.3,
+    }
+}
+
 // Adapted from https://medium.com/@pdx.lucasm/canvas-with-react-js-32e133c05258
 const D2Graphic = props => {
     const canvasRef = useRef(null);
@@ -46,11 +58,12 @@ const D2Graphic = props => {
         ctx.stroke();
         ctx.fill();
 
-        // Render roll number#
+        // Render roll number
         ctx.fillStyle = 'black';
         ctx.beginPath();
-        ctx.font = "30px Arial";
-        ctx.fillText(props.rollnumber, 20, 46);
+        ctx.font = diceFont;
+        var numCoords = centerNumber(props.rollnumber, ctx.canvas.width, ctx.canvas.height, diceFontSize);
+        ctx.fillText(props.rollnumber, numCoords['xPoint'], numCoords['yPoint']);
     }
 
     // Renders a rollnumber fed through props
@@ -73,7 +86,7 @@ const D2Graphic = props => {
         // Render roll number#
         ctx.fillStyle = 'black';
         ctx.beginPath();
-        ctx.font = "30px Arial";
+        ctx.font = diceFont;
         ctx.fillText(props.rollnumber, 18, 46);
     }
 
@@ -97,8 +110,9 @@ const D2Graphic = props => {
         // Render roll number#
         ctx.fillStyle = 'black';
         ctx.beginPath();
-        ctx.font = "30px Arial";
-        ctx.fillText(props.rollnumber, 20, 40);
+        ctx.font = diceFont;
+        var numCoords = centerNumber(props.rollnumber, ctx.canvas.width, ctx.canvas.height, diceFontSize);
+        ctx.fillText(props.rollnumber, numCoords['xPoint'], numCoords['yPoint']);
     }
 
     // Renders a rollnumber fed through props
@@ -129,8 +143,9 @@ const D2Graphic = props => {
         // Render roll number#
         ctx.fillStyle = 'white';
         ctx.beginPath();
-        ctx.font = "30px Arial";
-        ctx.fillText(props.rollnumber, 20, 40);
+        ctx.font = diceFont;
+        var numCoords = centerNumber(props.rollnumber, ctx.canvas.width, ctx.canvas.height, diceFontSize);
+        ctx.fillText(props.rollnumber, numCoords['xPoint'], numCoords['yPoint']);
     }
 
     // Renders a rollnumber fed through props
@@ -160,8 +175,9 @@ const D2Graphic = props => {
         // Render roll number#
         ctx.fillStyle = 'white';
         ctx.beginPath();
-        ctx.font = "30px Arial";
-        ctx.fillText(props.rollnumber, 20, 40);
+        ctx.font = diceFont;
+        var numCoords = centerNumber(props.rollnumber, ctx.canvas.width, ctx.canvas.height, diceFontSize);
+        ctx.fillText(props.rollnumber, numCoords['xPoint'], numCoords['yPoint']);
     }
 
     // Determine what dice gets drawn
