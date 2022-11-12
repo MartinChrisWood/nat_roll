@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import D6Graphic from './canvas';
+import D2Graphic from './canvas';
 import './index.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -9,6 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 // Dice must show appropriate shape and different pastel fills to help discern
 // Must work as mobile app
 // Can I add a mobius die?
+// Todo: update key function to prevent clashes forever
 
 function randomKey() {
     // For generating unique id's
@@ -20,7 +21,7 @@ class Dice extends React.Component {
   // Creates single isolated canvas for dice
   render() {
     return (
-        <D6Graphic rollnumber={this.props.roll}
+        <D2Graphic rollnumber={this.props.roll} sides={this.props.sides}
         onClick={this.props.onClick}/>
     );
   }
@@ -50,7 +51,7 @@ class DiceTray extends React.Component {
 
   getDiceIndex(diceKey) {
     for (var i = 0; i < this.state.tray.length; i++) {
-        if (this.state.tray[i]['dice_key'] == diceKey) {
+        if (this.state.tray[i]['dice_key'] === diceKey) {
             return i;
         };
     };
@@ -103,7 +104,12 @@ class DiceTray extends React.Component {
       <div id="dice_tray">
         <div>
           <h2>Test tray: {this.state.tray.length}.</h2>
-          <button onClick={() => this.addDice(6)}>Add Dice</button>
+          <button onClick={() => this.addDice(2)}>Add Coin</button>
+          <button onClick={() => this.addDice(6)}>Add D6</button>
+          <button onClick={() => this.addDice(8)}>Add D8</button>
+          <button onClick={() => this.addDice(10)}>Add D10</button>
+          <button onClick={() => this.addDice(12)}>Add D12</button>
+          <button onClick={() => this.addDice(20)}>Add D20</button>
           <button onClick={() => this.rollAllDice()}>Roll Dice</button>
           <button onClick={() => this.setState({tray: []})}>Clear Dice</button>
         </div>
@@ -112,6 +118,7 @@ class DiceTray extends React.Component {
           <Dice 
             key={component.dice_key} 
             roll={component.dice_roll}
+            sides={component.dice_sides}
             onClick={() => this.handleDiceClick(component.dice_key)}/>))}
         </div>
       </div>
