@@ -128,6 +128,7 @@ class DiceTray extends React.Component {
               <li><button onClick={() => this.addDice(12)}>Add D12</button></li>
               <li><button onClick={() => this.addDice(20)}>Add D20</button></li>
             </ul>
+            <hr></hr>
             <ul>
               <li><button onClick={() => this.rollAllDice()}>Roll Dice</button></li>
               <li><button onClick={() => this.setState({tray: [], diceTotal: 0})}>Clear Dice</button></li>

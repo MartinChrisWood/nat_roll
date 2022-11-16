@@ -1,3 +1,13 @@
+# Dice Tray
+
+A simple dice tray web app for games, because I lose all the dice, all the time.
+
+Original Create React App help notes below.
+
+![Screenshot of example dice in virtual tray](/public/app_screenshot.jpg "App screenshot")
+
+---
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

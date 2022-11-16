@@ -44,11 +44,23 @@ nav ul {
   padding: 0;
 }
 
+hr {
+  background-color: rgb(3, 75, 25);
+  color: rgb(3, 75, 25);
+  height: 1px;
+  border: none;
+}
+
 article {
   float: left;
   padding: 10px;
   width: 80%;
   background-color: white;
+}
+
+/* Each dice rendering is an individual canvas */
+canvas {
+  padding: 10px;
 }
 
 /* Clear floats after the columns */
