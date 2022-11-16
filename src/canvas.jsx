@@ -87,7 +87,8 @@ const D2Graphic = props => {
         ctx.fillStyle = 'black';
         ctx.beginPath();
         ctx.font = diceFont;
-        ctx.fillText(props.rollnumber, 18, 46);
+        var numCoords = centerNumber(props.rollnumber, ctx.canvas.width, ctx.canvas.height, diceFontSize);
+        ctx.fillText(props.rollnumber, numCoords['xPoint'], numCoords['yPoint']);
     }
 
     // Renders a rollnumber fed through props
