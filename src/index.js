@@ -33,6 +33,7 @@ class DiceTray extends React.Component {
       tray: [],
       timer: null,
       diceTotal: 0,
+      sumInterval: 0,
     };
   }
 
@@ -45,7 +46,7 @@ class DiceTray extends React.Component {
         dice_sides: n_sides,
         dice_roll: 0,
     }
-    this.setState({tray: tray.concat([dice]), diceTotal: this.sumDice()});
+    this.setState({tray: tray.concat([dice])});
   }
 
   getDiceIndex(diceKey) {
@@ -57,9 +58,9 @@ class DiceTray extends React.Component {
   }
 
   sumDice() {
-    var diceTotal = 0;
-    this.state.tray.forEach((item) => diceTotal = diceTotal + item.dice_roll);
-    return diceTotal;
+    var summed = 0;
+    this.state.tray.forEach((item) => summed = summed + item.dice_roll);
+    this.setState({diceTotal: summed});
   }
 
   removeDice(diceKey) {
@@ -69,7 +70,7 @@ class DiceTray extends React.Component {
 
     // remove elements in-place
     tray.splice(i, 1);
-    this.setState({tray: tray, diceTotal: this.sumDice()});
+    this.setState({tray: tray});
   }
 
   rollOneDice(diceKey) {
@@ -84,15 +85,15 @@ class DiceTray extends React.Component {
       dice['dice_roll'] = (1 + Math.floor(Math.random() * dice.dice_sides));
     };
     tray[i] = dice;
-    this.setState({tray: tray, diceTotal: this.sumDice()});
+    this.setState({tray: tray});
   }
 
   handleDiceClick(diceKey) {
     if (window.event.ctrlKey) {
-        this.removeDice(diceKey);
-        return;
-    }
-    this.rollOneDice(diceKey);
+      this.removeDice(diceKey);
+    } else {
+      this.rollOneDice(diceKey);
+    };
   }
 
   rollAllDice() {
@@ -107,7 +108,18 @@ class DiceTray extends React.Component {
         };
         tray[i] = dice;
     }
-    this.setState({tray: tray, diceTotal: this.sumDice()});
+    this.setState({tray: tray});
+  }
+
+  componentDidMount() {
+    // Update the sum visual every 1/10th second
+    this.state.sumInterval = setInterval(() => {
+      this.sumDice();
+    }, 100);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.state.sumInterval);
   }
 
   render() {
