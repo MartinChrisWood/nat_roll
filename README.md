@@ -4,6 +4,8 @@ A simple dice tray web app for games, because I lose all the dice, all the time.
 
 Original Create React App help notes below.
 
+[Try out the app on GitHub Pages](https://ozwaldcavendish.github.io/nat_roll/)
+
 ![Screenshot of example dice in virtual tray](/public/app_screenshot.jpg "App screenshot")
 
 ---
