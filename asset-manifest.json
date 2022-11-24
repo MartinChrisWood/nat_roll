@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/nat_roll/static/css/main.5c497234.css",
+    "main.js": "/nat_roll/static/js/main.80c46b1d.js",
+    "index.html": "/nat_roll/index.html",
+    "main.5c497234.css.map": "/nat_roll/static/css/main.5c497234.css.map",
+    "main.80c46b1d.js.map": "/nat_roll/static/js/main.80c46b1d.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.5c497234.css",
+    "static/js/main.80c46b1d.js"
+  ]
+}
